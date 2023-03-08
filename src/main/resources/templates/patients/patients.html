@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<div class="container-fluid p-5 text-center">
+    <h3 th:if="${patients.size()>0}" class="pb-4" th:text="'Patients: ' + ${patients.size()}"> </h3>
+    <h3 th:unless="${patients} and ${patients.size()}">There are no patients!</h3>
+    <table th:if="${patients.size()>0}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Middle name</th>
+            <th>Last name</th>
+            <th>EGN</th>
+            <th>Doctor</th>
+            <th>Has insurance</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.id}"></td>
+            <td th:text="${patient.firstName}"></td>
+            <td th:text="${patient.middleName}"></td>
+            <td th:text="${patient.lastName}"></td>
+            <td th:text="${patient.egn}"></td>
+            <td th:text="${patient.doctor.firstName} + ' ' + ${patient.doctor.lastName}"></td>
+            <td th:text="${patient.hasInsurance}"></td>
+            <td><a class="btn btn-info" th:href="@{'/patients/edit-patient/'+${patient.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/patients/delete/'+${patient.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

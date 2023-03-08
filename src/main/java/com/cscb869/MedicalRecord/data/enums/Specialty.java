@@ -1,0 +1,5 @@
+package com.cscb869.MedicalRecord.data.enums;
+
+public enum Specialty {
+    CARDIOLOGY, GENERAL_MEDICINE, SURGERY, INFECTIOUS_DISEASES, ANESTHESIOLOGY, GASTROENTEROLOGY
+}

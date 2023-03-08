@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h3 class="text-center pt-4">Update the medical examination</h3>
+<div class="container p-3 text-center">
+    <form action="#" th:action="@{/medical-examinations/update/{id}(id=${id})}" th:object="${medicalExamination}"
+          method="post">
+        <div class="form-group">
+            <label for="patient">Patient</label>
+            <select class="form-control" th:field="${medicalExamination.patient}" id="patient">
+                <option value="">Select patient</option>
+                <option th:each="patient : ${patients}" th:value="${patient.id}"
+                        th:text="${patient.firstName} + ' ' + ${patient.lastName}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="doctor">Doctor</label>
+            <select class="form-control" th:field="${medicalExamination.doctor}" id="doctor">
+                <option value="">Select doctor</option>
+                <option th:each="doctor : ${doctors}" th:value="${doctor.id}"
+                        th:text="${doctor.firstName} + ' ' + ${doctor.lastName}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="examinationDate">Examination date</label>
+            <input class="form-control" type="text" th:field="*{examinationDate}"
+                   placeholder="Examination date" id="examinationDate">
+            <span class="text-danger" th:if="${#fields.hasErrors('examinationDate')}" th:errors
+                    ="*{examinationDate}">Examination date error</span>
+        </div>
+
+        <label for="diagnosis">Diagnosis</label>
+        <select class="form-control" th:field="${medicalExamination.diagnosis}" id="diagnosis">
+            <option value="">Select diagnosis</option>
+            <option th:each="diagnosis: ${diagnoses}" th:value="${diagnosis.id}"
+                    th:text="${diagnosis.name}"></option>
+        </select>
+
+        <div class="form-group">
+            <label for="treatment">Treatment</label>
+            <input class="form-control" type="text" th:field="*{treatment}"
+                   placeholder="Treatment" id="treatment">
+            <span class="text-danger" th:if="${#fields.hasErrors('treatment')}" th:errors
+                    ="*{treatment}">Treatment error</span>
+        </div>
+
+        <div class="form-group">
+            <label for="needsSickSheet">Needs sick sheet?</label> <br>
+            <input type="radio" th:field="*{needsSickSheet}" value="1" th:checked="checked" id="needsSickSheet">Yes
+            <input type="radio" th:field="*{needsSickSheet}" value="0"> No<br>
+        </div>
+
+        <label for="sickSheet">Sick sheet</label>
+        <select class="form-control" th:field="${medicalExamination.sickSheet}" id="sickSheet">
+            <option value="">Select sick sheet</option>
+            <option th:each="sickSheet: ${sickSheets}" th:value="${sickSheet.id}"
+                    th:text="${sickSheet.id}"></option>
+        </select>
+        <button type="submit" class="btn btn-primary mt-4">Update Medical Examination</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

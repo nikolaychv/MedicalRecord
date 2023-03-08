@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h3 class="text-center pt-4">Update the sick sheet</h3>
+<div class="container p-3 text-center">
+    <form action="#" th:action="@{/sick-sheets/update/{id}(id=${id})}" th:object="${sickSheet}" method="post">
+        <div class="form-group">
+            <label for="fromDate">From Date</label>
+            <input class="form-control" type="text" th:field="*{fromDate}" placeholder="From Date" id="fromDate">
+            <span class="text-danger" th:if="${#fields.hasErrors('fromDate')}" th:errors
+                    ="*{fromDate}">From Date error</span>
+        </div>
+
+        <div class="form-group">
+            <label for="toDate">To Date</label>
+            <input class="form-control" type="text" th:field="*{toDate}"
+                   placeholder="To Date" id="toDate">
+            <span class="text-danger" th:if="${#fields.hasErrors('toDate')}" th:errors
+                    ="*{toDate}">To Date error</span>
+        </div>
+
+        <div class="form-group pb-4">
+            <label for="description">Description</label>
+            <input class="form-control" type="text" th:field="*{description}"
+                   placeholder="Description" id="description">
+            <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors
+                    ="*{description}">Description error</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Sick Sheet</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

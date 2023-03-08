@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<div class="container-fluid p-5 text-center">
+    <h3 th:if="${medicalExaminations.size()>0}" class="pb-4"
+        th:text="'Medical Examinations: ' + ${medicalExaminations.size()}"> </h3>
+    <h3 th:unless="${medicalExaminations} and ${medicalExaminations.size()}">There are no medical examinations!</h3>
+    <table th:if="${medicalExaminations.size()>0}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Examination Date</th>
+            <th>Diagnosis</th>
+            <th>Treatment</th>
+            <th>Needs Sick Sheet?</th>
+            <th>Sick Sheet</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="medicalExamination : ${medicalExaminations}">
+            <td th:text="${medicalExamination.id}"></td>
+            <td th:text="${medicalExamination.patient.firstName} + ' ' + ${medicalExamination.patient.lastName}"></td>
+            <td th:text="${medicalExamination.doctor.firstName} + ' ' + ${medicalExamination.doctor.lastName}"></td>
+            <td th:text="${medicalExamination.examinationDate}"></td>
+            <td th:text="${medicalExamination.diagnosis.name}"></td>
+            <td th:text="${medicalExamination.treatment}"></td>
+            <td th:text="${medicalExamination.needsSickSheet}"></td>
+            <td th:text="${medicalExamination.sickSheet.id}"></td>
+            <td><a class="btn btn-info" th:href="@{'/medical-examinations/edit-medical-examination/'+
+            ${medicalExamination.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/medical-examinations/delete/'+
+            ${medicalExamination.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

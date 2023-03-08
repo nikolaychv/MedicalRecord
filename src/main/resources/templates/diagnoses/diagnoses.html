@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<div class="container-fluid p-5 text-center">
+    <h3 th:if="${diagnoses.size()>0}" class="pb-4" th:text="'Diagnoses: ' + ${diagnoses.size()}"> </h3>
+    <h3 th:unless="${diagnoses} and ${diagnoses.size()}">There are no diagnoses!</h3>
+    <table th:if="${diagnoses.size()>0}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="diagnosis : ${diagnoses}">
+            <td th:text="${diagnosis.id}"></td>
+            <td th:text="${diagnosis.name}"></td>
+            <td th:text="${diagnosis.description}"></td>
+            <td><a class="btn btn-info" th:href="@{'/diagnoses/edit-diagnosis/'+${diagnosis.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/diagnoses/delete/'+${diagnosis.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

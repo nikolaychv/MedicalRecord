@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4 class="text-center pt-4">Search Diagnoses</h4>
+<div class="container p-3 text-center">
+    <form action="#" th:action="@{/diagnoses/names-description}" method="get">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" th:name="name" placeholder="Name" id="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input class="form-control" type="text" th:name="description" placeholder="Description" id="description">
+        </div>
+        <button type="submit" class="btn btn-primary">Search Diagnoses</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

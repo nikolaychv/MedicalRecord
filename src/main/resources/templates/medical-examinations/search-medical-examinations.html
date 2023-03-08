@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Search Medical examinations</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/medical-examinations/lastname-examinationdate}" method="get">
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input class="form-control" type="text" th:name="lastName" placeholder="Last name" id="lastName">
+            <label for="examinationDate">Examination Date</label>
+            <input class="form-control" type="date" th:name="examinationDate" placeholder="dd-mm-yyyy"
+                   id="examinationDate">
+        </div>
+        <button type="submit" class="btn btn-primary">Search Medical examinations</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

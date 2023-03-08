@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<div class="container-fluid p-5 text-center">
+    <h3 th:if="${sickSheets.size()>0}" class="pb-4" th:text="'Sick sheets: ' + ${sickSheets.size()}"> </h3>
+    <h3 th:unless="${sickSheets} and ${sickSheets.size()}">There are no sick sheets!</h3>
+    <table th:if="${sickSheets.size()>0}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sickSheet : ${sickSheets}">
+            <td th:text="${sickSheet.id}"></td>
+            <td th:text="${sickSheet.fromDate}"></td>
+            <td th:text="${sickSheet.toDate}"></td>
+            <td th:text="${sickSheet.description}"></td>
+            <td><a class="btn btn-info" th:href="@{'/sick-sheets/edit-sick-sheet/'+${sickSheet.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/sick-sheets/delete/'+${sickSheet.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
